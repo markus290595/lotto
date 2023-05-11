@@ -13,10 +13,10 @@ class lottozahlen():
         """
 
         # Parameter festlegen
-        self.__erste = erste
-        self.__letzte = letzte
-        self.__ziehungen = ziehungen
-        self.__lottozahlen = []
+        self._erste = erste
+        self._letzte = letzte
+        self._ziehungen = ziehungen
+        self._lottozahlen = []
 
         # generate Methode aufrufen
         self.__generate()
@@ -28,8 +28,8 @@ class lottozahlen():
         :rtype: None
         """
 
-        for _ in range (0, self.__ziehungen):
-            self.__lottozahlen.append(np.random.randint(self.__erste, self.__letzte + 1))
+        for _ in range (0, self._ziehungen):
+            self._lottozahlen.append(np.random.randint(self._erste, self._letzte + 1))
 
     def return_lottozahlen(self):
         """Gibt die gezogenen Lottozahlen zurück
@@ -37,7 +37,7 @@ class lottozahlen():
         :rtype: list
         """
 
-        return self.__lottozahlen
+        return self._lottozahlen
     
     def return_mean(self):
         """Gibt den Mittelwert der gezogenen Lottozahlen zurück
@@ -45,7 +45,7 @@ class lottozahlen():
         :rtype: float
         """
 
-        return np.mean(self.__lottozahlen)
+        return np.mean(self._lottozahlen)
 
 
 class lottozahlen_simulator():
@@ -60,11 +60,11 @@ class lottozahlen_simulator():
         """
 
         # Parameter festlegen
-        self.__erste = erste
-        self.__letzte = letzte
-        self.__ziehungen = ziehungen
-        self.__anzahl = anzahl
-        self.__liste_lottozahlen = []
+        self._erste = erste
+        self._letzte = letzte
+        self._ziehungen = ziehungen
+        self._anzahl = anzahl
+        self._liste_lottozahlen = []
 
         # generate Methode aufrufen
         self.__generate()
@@ -75,14 +75,14 @@ class lottozahlen_simulator():
         :rtype: None
         """
 
-        for _ in range(0, self.__anzahl + 1):
+        for _ in range(0, self._anzahl):
             aktuelle_ziehung = lottozahlen(
-                erste = self.__erste,
-                letzte = self.__letzte,
-                ziehungen = self.__ziehungen
+                erste = self._erste,
+                letzte = self._letzte,
+                ziehungen = self._ziehungen
             )
 
-            self.__liste_lottozahlen.append(aktuelle_ziehung.return_lottozahlen())
+            self._liste_lottozahlen.append(aktuelle_ziehung.return_lottozahlen())
 
     def return_mean(self):
         """Gibt den Mittelwert der Mittelwerte aller Ziehungen zurück.
@@ -92,7 +92,7 @@ class lottozahlen_simulator():
 
         mean_liste = []
 
-        for lottozahlen in self.__liste_lottozahlen:
+        for lottozahlen in self._liste_lottozahlen:
             mean_liste.append(np.mean(lottozahlen))
 
         return np.mean(mean_liste)
@@ -102,6 +102,6 @@ class lottozahlen_simulator():
         :return: Liste der Lottozahlen aller simulierten Spiele
         :rtype: list
         """
-        return self.__liste_lottozahlen
+        return self._liste_lottozahlen
 
 
